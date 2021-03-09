@@ -3,5 +3,5 @@ version: @version@
 main: com.github.huda0209.realchat.RealChat
 api-version: 1.13
 prefix: RealChat
-depend: [ lunachat ]
+depend: [ LunaChat ]
 authors: [ huda0209 ]
