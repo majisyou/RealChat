@@ -1,5 +1,7 @@
 package com.github.huda0209.realchat;
 
+import com.github.huda0209.realchat.listener.ChatEventListener;
+
 import com.github.ucchyocean.lc3.LunaChat;
 import com.github.ucchyocean.lc3.LunaChatAPI;
 import org.bukkit.command.CommandExecutor;
@@ -10,8 +12,10 @@ public final class RealChat extends JavaPlugin implements CommandExecutor{
     final String PluginName = this.getDescription().getName();
     static LunaChatAPI lunachatapi;
 
+
     @Override
     public void onEnable() {
+        this.saveConfig();
 
         if(getServer().getPluginManager().isPluginEnabled("LunaChat")){
             LunaChat lunachat = (LunaChat)getServer().getPluginManager().getPlugin("LunaChat");
@@ -21,8 +25,12 @@ public final class RealChat extends JavaPlugin implements CommandExecutor{
             this.setEnabled(false);
         }
 
-        this.saveConfig();
-        
+        String[] EnableMessage = {"=============================","Plugin Name : "+PluginName ,"Author : "+ this.getDescription().getAuthors(),"============================="};
+        for (String s : EnableMessage) {
+            getLogger().info(s);
+        }
+        getServer().getPluginManager().registerEvents(new ChatEventListener(this,lunachatapi),this);
+
     }
 
     @Override
