@@ -17,13 +17,7 @@ public final class RealChat extends JavaPlugin implements CommandExecutor{
     public void onEnable() {
         this.saveConfig();
 
-        if(getServer().getPluginManager().isPluginEnabled("LunaChat")){
-            LunaChat lunachat = (LunaChat)getServer().getPluginManager().getPlugin("LunaChat");
-            lunachatapi = lunachat.getAPI();
-        }else{
-            getLogger().warning("Can't load Lunachat. This plugin was disabled.");
-            this.setEnabled(false);
-        }
+        getLunaChatAPI();
 
         String[] EnableMessage = {"=============================","Plugin Name : "+PluginName ,"Author : "+ this.getDescription().getAuthors(),"============================="};
         for (String s : EnableMessage) {
@@ -36,5 +30,19 @@ public final class RealChat extends JavaPlugin implements CommandExecutor{
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+
+    private void getLunaChatAPI(){
+        try{
+            lunachatapi = LunaChat.getAPI();
+            if(lunachatapi == null) {
+                getLogger().warning("Can't load Lunachat. This plugin was disabled.");
+                this.setEnabled(false);
+            }
+        }catch(Exception e){
+            getLogger().warning("Can't load Lunachat. This plugin was disabled.");
+            this.setEnabled(false);
+        }
     }
 }
