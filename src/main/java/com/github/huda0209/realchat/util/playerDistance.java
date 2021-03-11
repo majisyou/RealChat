@@ -11,12 +11,6 @@ public class playerDistance {
 
         double SquaredPlayerDistance = (Dx*Dx + Dy*Dy + Dz*Dz);
 
-        return SquaredPlayerDistance <= distance;
+        return SquaredPlayerDistance <= (distance^2);
     }
-
-
-
-
-
-
 }
