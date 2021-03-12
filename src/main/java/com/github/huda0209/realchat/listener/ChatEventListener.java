@@ -5,6 +5,7 @@ import com.github.huda0209.realchat.util.playerDistance;
 
 import com.github.ucchyocean.lc3.LunaChatAPI;
 import com.github.ucchyocean.lc3.japanize.JapanizeType;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -26,6 +27,8 @@ public class ChatEventListener implements Listener {
 
     @EventHandler
     public void ChatEvent(AsyncPlayerChatEvent event){
+        event.setCancelled(true);
+
         Player player = event.getPlayer();
         String message = event.getMessage();
 
@@ -36,7 +39,7 @@ public class ChatEventListener implements Listener {
 
         String chatMessage =  lunaChatAPI.japanize(message, JapanizeType.GOOGLE_IME);
 
-        event.setCancelled(false);
+
 
         for(Player worldPlayer : worldPlayers){
             Location worldPlayerLocation = worldPlayer.getLocation();
