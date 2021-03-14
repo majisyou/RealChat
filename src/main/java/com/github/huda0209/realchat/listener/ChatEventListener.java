@@ -1,10 +1,8 @@
 package com.github.huda0209.realchat.listener;
 
 import com.github.huda0209.realchat.RealChat;
+import com.github.huda0209.realchat.chat.ChatFormat;
 import com.github.huda0209.realchat.util.playerDistance;
-
-import com.github.ucchyocean.lc3.LunaChatAPI;
-import com.github.ucchyocean.lc3.japanize.JapanizeType;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -18,11 +16,9 @@ import java.util.List;
 
 public class ChatEventListener implements Listener {
     private final RealChat plugin;
-    private final LunaChatAPI lunaChatAPI;
 
-    public ChatEventListener(RealChat realChat, LunaChatAPI lcAPI){
+    public ChatEventListener(RealChat realChat){
         this.plugin = realChat;
-        this.lunaChatAPI = lcAPI;
     }
 
     @EventHandler
@@ -37,20 +33,16 @@ public class ChatEventListener implements Listener {
         World playerWorld = player.getWorld();
         List<Player> worldPlayers = playerWorld.getPlayers();
 
-        String chatMessage =  lunaChatAPI.japanize(message, JapanizeType.GOOGLE_IME);
 
+        String FormedMessage = ChatFormat.messageFormat(player,message);
 
+        System.out.println("(RC)"+FormedMessage);
 
         for(Player worldPlayer : worldPlayers){
             Location worldPlayerLocation = worldPlayer.getLocation();
             if(playerDistance.isRangeIn(playerLocation,worldPlayerLocation,10)){
-                player.sendMessage(chatMessage);
+                player.sendMessage(FormedMessage);
             }
         }
-    }
-
-    public void SendMessage(){
-
-
     }
 }
