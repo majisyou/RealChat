@@ -24,8 +24,7 @@ public final class RealChat extends JavaPlugin implements CommandExecutor{
         for (String s : EnableMessage) {
             getLogger().info(s);
         }
-        getServer().getPluginManager().registerEvents(new ChatEventListener(this,lunachatapi),this);
-
+        getServer().getPluginManager().registerEvents(new ChatEventListener(this),this);
     }
 
     @Override
@@ -45,5 +44,9 @@ public final class RealChat extends JavaPlugin implements CommandExecutor{
             getLogger().warning("Can't load Lunachat. This plugin was disabled.");
             this.setEnabled(false);
         }
+    }
+
+    public void logger(String msg){
+        getLogger().info(msg);
     }
 }
