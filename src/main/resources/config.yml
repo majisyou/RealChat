@@ -6,3 +6,7 @@
 #  |      GitHub : https://github.com/huda0209/RealChat       |
 #  |                     ran by paper 1.13                    |
 #  ------------------------------------------------------------
+
+
+PluginMode: true
+NoPlayerChatRangeError: true
