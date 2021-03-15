@@ -7,7 +7,6 @@ import com.github.ucchyocean.lc3.japanize.JapanizeType;
 import com.github.ucchyocean.lc3.member.ChannelMember;
 import com.github.ucchyocean.lc3.util.ClickableFormat;
 import com.github.ucchyocean.lc3.util.Utility;
-
 import org.bukkit.entity.Player;
 
 import java.nio.charset.StandardCharsets;
@@ -18,8 +17,7 @@ public class ChatFormat{
     public static String messageFormat(Player sender, String message) {
         LunaChatConfig config = LunaChat.getConfig();
         LunaChatAPI api = LunaChat.getAPI();
-        ChannelMember player =
-                ChannelMember.getChannelMember(sender);
+        ChannelMember player = ChannelMember.getChannelMember(sender);
 
         // NGワード発言をマスク
         for (Pattern pattern : config.getNgwordCompiled()) {
