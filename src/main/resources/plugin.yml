@@ -5,3 +5,13 @@ api-version: 1.13
 prefix: RealChat
 depend: [ LunaChat ]
 authors: [ huda0209 ]
+commands:
+  realchat:
+    description: RealChat plugin command.
+permissions:
+  RealChat.GlobalChat:
+    default: op
+  RealChat.AdminMode:
+    default: op
+  RealChat.Reload:
+    default: op
