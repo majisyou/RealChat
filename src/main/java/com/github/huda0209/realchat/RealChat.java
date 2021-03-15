@@ -1,9 +1,8 @@
 package com.github.huda0209.realchat;
 
+import com.github.huda0209.realchat.command.CommandHandler;
 import com.github.huda0209.realchat.listener.ChatEventListener;
-
-import com.github.ucchyocean.lc3.LunaChat;
-import com.github.ucchyocean.lc3.LunaChatAPI;
+import com.github.huda0209.realchat.config.loadConfig;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,20 +10,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class RealChat extends JavaPlugin implements CommandExecutor{
 
     final String PluginName = this.getDescription().getName();
-    static LunaChatAPI lunachatapi;
-
 
     @Override
     public void onEnable() {
-        this.saveConfig();
+        this.saveDefaultConfig();
 
-        getLunaChatAPI();
+        loadConfig.LoadConfigFile(this);
+        if(!SetMode()) return;
 
         String[] EnableMessage = {"=============================","Plugin Name : "+PluginName ,"Author : "+ this.getDescription().getAuthors(),"============================="};
         for (String s : EnableMessage) {
             getLogger().info(s);
         }
+
         getServer().getPluginManager().registerEvents(new ChatEventListener(this),this);
+        getCommand("realchat").setExecutor(new CommandHandler(this));
     }
 
     @Override
@@ -33,20 +33,16 @@ public final class RealChat extends JavaPlugin implements CommandExecutor{
     }
 
 
-    private void getLunaChatAPI(){
-        try{
-            lunachatapi = LunaChat.getAPI();
-            if(lunachatapi == null) {
-                getLogger().warning("Can't load Lunachat. This plugin was disabled.");
-                this.setEnabled(false);
-            }
-        }catch(Exception e){
-            getLogger().warning("Can't load Lunachat. This plugin was disabled.");
-            this.setEnabled(false);
-        }
-    }
-
     public void logger(String msg){
         getLogger().info(msg);
+    }
+
+    public boolean SetMode(){
+        if(!loadConfig.config.getBoolean("PluginMode")){
+            getLogger().info("Plugin mode was false. So this plguin was disable.");
+            this.setEnabled(false);
+            return false;
+        }
+        return true;
     }
 }
