@@ -1,6 +1,8 @@
 package com.github.huda0209.realchat;
 
 import com.github.huda0209.realchat.command.CommandHandler;
+import com.github.huda0209.realchat.command.TellCommandExecutor;
+import com.github.huda0209.realchat.command.tellCommand;
 import com.github.huda0209.realchat.listener.ChatEventListener;
 import com.github.huda0209.realchat.config.loadConfig;
 
@@ -18,12 +20,16 @@ public final class RealChat extends JavaPlugin implements CommandExecutor{
         loadConfig.LoadConfigFile(this);
         if(!SetMode()) return;
 
+
         String[] EnableMessage = {"=============================","Plugin Name : "+PluginName ,"Author : "+ this.getDescription().getAuthors(),"============================="};
         for (String s : EnableMessage) {
             getLogger().info(s);
         }
 
         getServer().getPluginManager().registerEvents(new ChatEventListener(this),this);
+        getServer().getPluginManager().registerEvents(new tellCommand(this),this);
+
+        getCommand("tell").setExecutor(new TellCommandExecutor(this));
         getCommand("realchat").setExecutor(new CommandHandler(this));
     }
 
