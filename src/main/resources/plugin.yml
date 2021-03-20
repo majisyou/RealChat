@@ -8,6 +8,8 @@ authors: [ huda0209 ]
 commands:
   realchat:
     description: RealChat plugin command.
+  tell:
+    description: aa
 permissions:
   RealChat.GlobalChat:
     default: op
