@@ -31,7 +31,11 @@ public class tellCommandListener implements Listener {
         if(!(FromPlayer instanceof Player) || !(toPlayer instanceof Player)) return;
 
         if(FromPlayer.hasPermission("RealChat.SendNoLimitTell")) return;
-        if(toPlayer.hasPermission("RealChat.ReserveNoLimitTell") && ModeManager.getReserveNoLimitTellMode(toPlayer)) return;
+
+        if(toPlayer.hasPermission("RealChat.ReserveNoLimitTell") &&
+                ModeManager.getReserveNoLimitTellMode(toPlayer) &&
+                !playerDistance.isRangeIn(FromPlayer.getLocation(), toPlayer.getLocation(), loadConfig.config.getInt("CanChatRange"))
+        ) return;
 
         if(!playerDistance.isRangeIn(FromPlayer.getLocation(), toPlayer.getLocation(), loadConfig.config.getInt("CanChatRange"))){
             event.setCancelled(true);
