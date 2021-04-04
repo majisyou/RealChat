@@ -11,6 +11,13 @@ commands:
 permissions:
   RealChat.GlobalChat:
     default: op
+  RealChat.ReserveNoLimitTell:
+    default: op
+  RealChat.SendNoLimitTell:
+    default: op
+  RealChat.ReserveNoLimitTellMode:
+    default: op
+
   RealChat.AdminMode:
     default: op
   RealChat.Reload:
