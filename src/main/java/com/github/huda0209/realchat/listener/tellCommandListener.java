@@ -2,6 +2,9 @@ package com.github.huda0209.realchat.listener;
 
 import com.github.huda0209.realchat.RealChat;
 import com.github.huda0209.realchat.util.playerDistance;
+import com.github.huda0209.realchat.ModeManager;
+import com.github.huda0209.realchat.config.loadConfig;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,13 +28,13 @@ public class tellCommandListener implements Listener {
         Player FromPlayer = event.getPlayer();
         Player toPlayer = this.plugin.getServer().getPlayer((command[1]));
 
-        System.out.println(FromPlayer.getName());
-        System.out.println(toPlayer.getName());
-
         if(!(FromPlayer instanceof Player) || !(toPlayer instanceof Player)) return;
 
-        if(!playerDistance.isRangeIn(FromPlayer.getLocation(),toPlayer.getLocation(),10)){
-            event.setCancelled(false);
+        if(FromPlayer.hasPermission("RealChat.SendNoLimitTell")) return;
+        if(toPlayer.hasPermission("RealChat.ReserveNoLimitTell") && ModeManager.getReserveNoLimitTellMode(toPlayer)) return;
+
+        if(!playerDistance.isRangeIn(FromPlayer.getLocation(), toPlayer.getLocation(), loadConfig.config.getInt("CanChatRange"))){
+            event.setCancelled(true);
             FromPlayer.sendMessage("[§aRC§r]§c範囲内に指定プレイヤーがいなかったため、コマンドの実行をキャンセルしました。");
             System.out.println("tell command cancelled.");
         }
