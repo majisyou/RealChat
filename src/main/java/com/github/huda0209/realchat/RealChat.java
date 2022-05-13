@@ -4,6 +4,7 @@ import com.github.huda0209.realchat.command.CommandHandler;
 import com.github.huda0209.realchat.listener.ChatEventListener;
 import com.github.huda0209.realchat.config.loadConfig;
 
+import com.github.huda0209.realchat.listener.DeathMessageListener;
 import com.github.huda0209.realchat.listener.tellCommandListener;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,12 +12,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class RealChat extends JavaPlugin implements CommandExecutor{
 
     final String PluginName = this.getDescription().getName();
+    private static RealChat instance;
+    public RealChat(){instance = this;}
+    public static RealChat getInstance(){
+        return instance;
+    }
 
     @Override
     public void onEnable(){
         this.saveDefaultConfig();
-
         loadConfig.LoadConfigFile(this);
+//        loadConfig.Load(this);
         if(!SetMode()) return;
 
         String[] EnableMessage = {"=============================","Plugin Name : "+PluginName ,"Author : "+ this.getDescription().getAuthors(),"============================="};
@@ -24,8 +30,9 @@ public final class RealChat extends JavaPlugin implements CommandExecutor{
             getLogger().info(s);
         }
 
+        getServer().getPluginManager().registerEvents(new DeathMessageListener(),this);
         getServer().getPluginManager().registerEvents(new ChatEventListener(this),this);
-        getServer().getPluginManager().registerEvents(new tellCommandListener(this),this);
+//        getServer().getPluginManager().registerEvents(new tellCommandListener(this),this);
         getCommand("realchat").setExecutor(new CommandHandler(this));
     }
 

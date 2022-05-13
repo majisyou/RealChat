@@ -2,7 +2,7 @@
 #  |                      RealChat plugin                     |
 #  |                                                          |
 #  |           Author : huda0209                              |
-#  |           Depend : LunaChat                              |
+#  |                                        |
 #  |   GitHub : https://github.com/AzisabaNetwork/RealChat    |
 #  |                     ran by paper 1.13                    |
 #  ------------------------------------------------------------
@@ -10,5 +10,9 @@
 
 PluginMode: true
 
-CanChatRange: 10
+CanChatRange: 15
 NoPlayerChatRangeError: true
+
+NoGlobalList:
+  - uuid
+  -

@@ -3,8 +3,8 @@ version: @version@
 main: com.github.huda0209.realchat.RealChat
 api-version: 1.13
 prefix: RealChat
-depend: [ LunaChat ]
-authors: [ huda0209 ]
+depend:
+authors: [ huda0209 and majisyou]
 commands:
   realchat:
     description: RealChat plugin command.
