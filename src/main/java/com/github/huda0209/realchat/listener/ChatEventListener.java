@@ -9,6 +9,7 @@ import com.github.huda0209.realchat.config.loadConfig;
 //import com.github.ucchyocean.lc3.LunaChat;
 //import com.github.ucchyocean.lc3.LunaChatConfig;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -42,10 +43,11 @@ public class ChatEventListener implements Listener {
         }
 
         event.setCancelled(true);
-        message = "<"+player.getDisplayName()+">"+message;
+        message = "<"+player.getName()+">"+message;
 //
 //        String FormedMessage = ChatFormat.messageFormat(player,message);
-        System.out.println("(RC)"+message);
+        RealChat.getInstance().getLogger().info("(RC)"+message);
+//        System.out.println("(RC)"+message);
 
         int searchPlayerNumber = 0;
         for(Player worldPlayer : worldPlayers){
@@ -79,13 +81,12 @@ public class ChatEventListener implements Listener {
 //                !config.getGlobalMarker().equals("") &&
 //                message.startsWith(config.getGlobalMarker()) &&
 //                message.length() > config.getGlobalMarker().length()){
+            message = "§a[GLOBAL]"+ ChatColor.WHITE +message;
+//
+//            String FormedMessage = message.substring(1);
+            event.setMessage(message);
 
-            event.getPlayer().setDisplayName(event.getPlayer().getName() + " §a[GLOBAL]");
-
-            String FormedMessage = message.substring(1);
-            event.setMessage(FormedMessage);
-
-            System.out.println("(RC)"+FormedMessage);
+//            System.out.println("(RC)"+message);
             return true;
 //        };
         //if()
